@@ -1,8 +1,17 @@
-@(title: String, description: String)
+@import helper._
+
+@(title: String, solution: Form[SubmitSolutionForm], description: String)(implicit messages: Messages)
 
 @main("Coding challenge ") {
 
     <h2>Coding challenge: @title</h2>
     <p>@description</p>
+    <br/>
+    <h4>Submit your solution:</h4>
 
+    @form(routes.ChallengeController.submitSolution()) {
+        @inputText(solution("Your code:"))
+
+        <input type="submit" value="Submit"/>
+    }
 }
