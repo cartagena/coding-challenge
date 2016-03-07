@@ -1,6 +1,7 @@
 import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._
+import play.api.libs.json.JsValue
 
 import play.api.test._
 import play.api.test.Helpers._
@@ -33,6 +34,13 @@ class ChallengeSpec extends Specification {
 
     }
 
+    "render a successful result when solution is right" in new WithApplication() {
+      val challengePage = route(FakeRequest(POST, "/challenge").withFormUrlEncodedBody("Your code" -> "test")).get
+
+      status(challengePage) must equalTo(OK)
+      contentType(challengePage) must beSome.which(_ == "text/html")
+      contentAsString(challengePage) must contain("Your solution is correct!")
+    }
 
   }
 }

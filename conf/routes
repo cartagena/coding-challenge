@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /challenges                 @controllers.ChallengeController.challenge
+GET     /challenge                  @controllers.ChallengeController.challenge
 POST    /challenge                  @controllers.ChallengeController.submitSolution
 
 # Map static resources from the /public folder to the /assets URL path
