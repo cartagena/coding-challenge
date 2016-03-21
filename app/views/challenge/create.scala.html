@@ -1,0 +1,29 @@
+@(challengeForm: Form[Challenge])(implicit msg: play.api.i18n.Messages)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(common.twitterBootstrapInput.f)}
+
+@main("Coding create ") {
+    <div class="container">
+        <div class="page-header">
+            <h3>Add new create</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+            @form(routes.ChallengeController.save()) {
+                <fieldset>@challenge.formElements(challengeForm)</fieldset>
+
+                <div class="actions">
+                    <input type="submit" value="Create this employee" class="btn btn-primary"> or
+                    <a href="@routes.ChallengeController.list()" class="btn btn-default">Cancel</a>
+                </div>
+            }
+            </div>
+            <div class="col-md-4">
+            ;)
+            </div>
+        </div>
+    </div>
+}

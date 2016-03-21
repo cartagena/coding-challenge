@@ -2,11 +2,15 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET     /challenge                  @controllers.ChallengeController.challenge
-POST    /challenge                  @controllers.ChallengeController.submitSolution
+# HOme
+GET    /                            controllers.HackerioController.index
+
+GET    /challenges                  controllers.ChallengeController.list(p: Int ?= 0, s: Int ?= 2, f ?= "")
+GET    /challenges/new              controllers.ChallengeController.create
+POST   /challenges/save             controllers.ChallengeController.save
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
-    
+# Map the webjar static assets to the /webjars URL
+GET    /webjars/*file               controllers.WebJarAssets.at(file)

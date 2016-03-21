@@ -6,8 +6,22 @@ lazy val `proglearn` = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.11.7"
 
-libraryDependencies ++= Seq( jdbc , cache , ws   , specs2 % Test )
+libraryDependencies ++= Seq(cache, ws)
+
+resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
+
+libraryDependencies ++= Seq(
+  specs2 % Test,
+  "org.reactivemongo" %% "play2-reactivemongo" % "0.11.2.play24",
+  "org.webjars" %% "webjars-play" % "2.4.0",
+  "org.webjars" % "bootstrap" % "3.3.5",
+  "org.webjars" % "bootswatch-united" % "3.3.4+1",
+  "org.webjars" % "html5shiv" % "3.7.0",
+  "org.webjars" % "respond" % "1.4.2"
+)
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
 
-resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"  
+routesGenerator := InjectedRoutesGenerator
+
+pipelineStages := Seq(rjs)

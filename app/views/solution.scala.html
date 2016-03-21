@@ -1,10 +1,11 @@
 @import helper._
+@*
 
 @(title: String, description: String, successful: Boolean = false, solution: Form[SubmitSolutionForm])(implicit messages: Messages)
 
-@main("Coding challenge ") {
+@main("Coding create ") {
 
-    <h2>Coding challenge: @title</h2>
+    <h2>Coding create: @title</h2>
     <p>@description</p>
     <br/>
     <h4>Submit your solution:</h4>
@@ -19,3 +20,4 @@
         <h5>Congratulations! Your solution is correct!</h5>
     }
 }
+*@
