@@ -37,7 +37,7 @@
                 <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by challenge name...">
                 <input type="submit" id="searchsubmit" value="Filter by name" class="btn btn-primary btn-sm">
             }
-            <a class="btn btn-success btn-sm pull-right" id="add" href="@routes.ChallengeController .create()">New challenge</a>
+            <a class="btn btn-success btn-sm pull-right" id="add" href="@routes.ChallengeController.create()">New challenge</a>
         </div>
 
         @Option(currentPage.items).filterNot(_.isEmpty).map { challenges =>

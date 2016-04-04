@@ -5,4 +5,4 @@
 @implicitFieldConstructor = @{ FieldConstructor(common.twitterBootstrapInput.f) }
 
 @inputText(challengeForm("name"), '_label -> "Name", 'class -> "form-control")
-@inputText(challengeForm("description"), '_label -> "Description", 'class -> "form-control")
+@textarea(challengeForm("description"), '_label -> "Description", 'class -> "form-control", 'style -> "height:300px")

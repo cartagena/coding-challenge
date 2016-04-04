@@ -10,7 +10,7 @@ class HackerioController @Inject()(
     extends Controller with I18nSupport {
 
   /**
-   * Handle default path requests, redirect to employee list
+   * Handle default path requests, redirect to challenge list
    */
   def index = Action { Redirect(routes.ChallengeController.list()) }
 

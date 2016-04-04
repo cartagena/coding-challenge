@@ -45,9 +45,11 @@ class ChallengeController @Inject()(
   val List = Redirect(routes.ChallengeController.list())
 
   def list(page: Int, orderBy: Int, filter: String) = Action.async { implicit request =>
-    val futurePage: Future[List[Challenge]] = getData(filter)
+    val dataPage: Future[List[Challenge]] = collection.genericQueryBuilder
+                                                      .cursor[Challenge]()
+                                                      .collect[List]()
 
-    futurePage.map({ challenges =>
+    dataPage.map({ challenges =>
       implicit val msg = messagesApi.preferred(request)
 
       val offset = dataPageSize * page;
@@ -57,7 +59,7 @@ class ChallengeController @Inject()(
       Ok(html.challenge.list(DataPage(challengesPage, page, offset, total), orderBy, filter))
     }).recover {
       case t: TimeoutException =>
-        Logger.error("Problem found in employee list process")
+        Logger.error("Problem found in challenges list process")
         InternalServerError(t.getMessage)
     }
   }
@@ -73,28 +75,15 @@ class ChallengeController @Inject()(
         implicit val msg = messagesApi.preferred(request)
         Future.successful(BadRequest(html.challenge.create(formWithErrors)))
       },
-      employee => {
-        val futureUpdateEmp = collection.insert(employee.copy(_id = BSONObjectID.generate))
+      challenge => {
+        val futureUpdateEmp = collection.insert(challenge.copy(_id = BSONObjectID.generate))
         futureUpdateEmp.map { result =>
-          List.flashing("success" -> s"Employee ${employee.name} has been created")
+          List.flashing("success" -> s"Challenge ${challenge.name} has been created")
         }.recover {
           case t: TimeoutException =>
-            Logger.error("Problem found in employee update process")
+            Logger.error("Problem found in challenge update process")
             InternalServerError(t.getMessage)
         }
       })
-  }
-
-  def getData(filter: String): Future[List[Challenge]] = {
-    if (filter.length > 0)
-      collection
-        .find(Json.obj("name" -> filter))
-        .cursor[Challenge]()
-        .collect[List]()
-    else
-      collection
-        .genericQueryBuilder
-        .cursor[Challenge]()
-        .collect[List]()
   }
 }
