@@ -36,7 +36,9 @@ class ChallengeController @Inject()(
     mapping(
       "id" -> ignored(BSONObjectID.generate: BSONObjectID),
       "name" -> nonEmptyText,
-      "description" -> nonEmptyText)
+      "description" -> nonEmptyText,
+      "input" -> nonEmptyText,
+      "output" -> nonEmptyText)
     (Challenge.apply)(Challenge.unapply))
 
   def collection: JSONCollection = db.collection[JSONCollection]("challenges")

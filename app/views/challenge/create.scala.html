@@ -4,10 +4,10 @@
 
 @implicitFieldConstructor = @{ FieldConstructor(common.twitterBootstrapInput.f)}
 
-@main("Coding create ") {
+@main("New challenge") {
     <div class="container">
         <div class="page-header">
-            <h3>Add new create</h3>
+            <h3>New challenge</h3>
         </div>
 
         <div class="row">
@@ -16,7 +16,7 @@
                 <fieldset>@challenge.formElements(challengeForm)</fieldset>
 
                 <div class="actions">
-                    <input type="submit" value="Create challenge" class="btn btn-primary"> or
+                    <input type="submit" value="Create challenge" class="btn btn-primary">
                     <a href="@routes.ChallengeController.list()" class="btn btn-default">Cancel</a>
                 </div>
             }

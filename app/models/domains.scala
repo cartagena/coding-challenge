@@ -5,7 +5,9 @@ import reactivemongo.bson.BSONObjectID
 case class Challenge(
   _id: BSONObjectID,
   name: String,
-  description: String)
+  description: String,
+  input: String,
+  output: String)
 
 case class DataPage[A](items: Seq[A], page: Int, offset: Long, total: Long) {
   lazy val prev = Option(page - 1).filter(_ >= 0)
